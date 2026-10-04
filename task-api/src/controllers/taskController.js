@@ -1,8 +1,12 @@
+const taskService = require("../services/taskService");
+
 const getAllTask = async (req, res, next) => {
     try {
+        const tasks = await taskService.getAllTask();
+
         res.status(200).json({
-            message: "Get all task controller",
-            data: [],
+            message: "Task retrieved successfully",
+            data: tasks,
         });
     } catch (error) {
         next(error);
@@ -11,9 +15,11 @@ const getAllTask = async (req, res, next) => {
 
 const getTaskById = async (req, res, next) => {
     try {
+        const task = await taskService.getTaskById(req.params.id);
+
         res.status(200).json({
-            message: "Get task by ID controller",
-            id: requestAnimationFrame.params.id,
+            message: "Task retrieved successfully",
+            data: task,
         });
     } catch (error) {
         next(error);
@@ -22,9 +28,11 @@ const getTaskById = async (req, res, next) => {
 
 const createTask = async (req, res, next) => {
     try {
+        const task = await taskService.createTask(req.body);
+
         res.status(201).json({
-            message: "Create task controller",
-            receivedData: req.body,
+            message: "Task created successfully",
+            data: task,
         });
     } catch (error) {
         next(error);
